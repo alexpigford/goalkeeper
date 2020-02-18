@@ -20,23 +20,28 @@ class GoalsList extends Component {
         return (
             <Container>
                 <CardGroup>
-                    {goals.map(({ id, title, description }) => (
-                        <Card body inverse color="warning">
+                    {goals.map(({ _id, title, description }) => (
+                        <Card 
+                        body inverse color="warning"
+                        key={_id}
+                        >
                         <CardTitle>{ title }</CardTitle>
                         <CardText>{ description }</CardText>
                         <Button 
                         color="secondary"
                         size="sm"
+                        style={{ marginBottom: '0.5rem' }}
                         >Progress</Button>
                         <Button 
                         color="info"
                         size="sm"
+                        style={{ marginBottom: '0.5rem' }}
                         >Edit</Button>
                         <Button
                         className="delete-btn"
                         color="danger"
                         size="sm"
-                        onClick={this.onDeleteClick.bind(this, id)}
+                        onClick={this.onDeleteClick.bind(this, _id)}
                         >Delete
                         </Button>
                         </Card>

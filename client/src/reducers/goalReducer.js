@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
         case DELETE_GOAL:
             return {
                 ...state,
-                goals: state.goals.filter(goal => goal.id !== action.payload)
+                goals: state.goals.filter(goal => goal._id !== action.payload)
             }
         case ADD_GOAL:
             return {

@@ -11,18 +11,22 @@ export const getGoals = () => dispatch => {
     )
 }
 
-export const addGoal = goal => {
-    return {
-        type: ADD_GOAL,
-        payload: goal
-    }
+export const addGoal = goal => dispatch => {
+    axios.post('/api/goals', goal)
+        .then(res => dispatch({
+            type: ADD_GOAL,
+            payload: res.data
+        })
+    )
 }
 
-export const deleteGoal = (id) => {
-    return {
-        type: DELETE_GOAL,
-        payload: id
-    }
+export const deleteGoal = (id) => dispatch => {
+    axios.delete(`/api/goals/${id}`)
+        .then(res => dispatch({
+            type: DELETE_GOAL,
+            payload: id
+        })
+    )
 }
 
 export const setGoalsLoading = () => {

@@ -12,7 +12,6 @@ import {
 from 'reactstrap'
 import { connect } from 'react-redux'
 import { addGoal } from '../actions/goalActions'
-import uuid from 'uuid'
 
 class AddGoalModal extends Component {
     state = {
@@ -35,7 +34,6 @@ class AddGoalModal extends Component {
         e.preventDefault()
 
         const newGoal = {
-            id: uuid(),
             title: this.state.title,
             description: this.state.description
         }
@@ -52,6 +50,7 @@ class AddGoalModal extends Component {
                     color="primary"
                     size="sm"
                     onClick={this.toggle}
+                    style={{ marginBottom: '2rem' }}
                 >New Goal</Button>
                 <Modal
                     isOpen={this.state.modal}

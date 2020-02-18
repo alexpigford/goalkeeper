@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Button, CardTitle, CardText, Container, CardGroup } from 'reactstrap'
-import uuid from 'uuid'
 import { connect } from 'react-redux'
-import { getGoals } from '../actions/goalActions'
+import { getGoals, deleteGoal } from '../actions/goalActions'
 import PropTypes from 'prop-types'
 
 class GoalsList extends Component {
@@ -11,23 +10,15 @@ class GoalsList extends Component {
         this.props.getGoals()
     }
 
+    onDeleteClick = (id) => {
+        this.props.deleteGoal(id)
+    }
+
     render() {
         const { goals } = this.props.goal
 
         return (
             <Container>
-                <Button
-                    color="secondary"
-                    onClick={() => {
-                        const title = prompt('Enter Title')
-                        const description = prompt('Enter Description')
-                        if (title && description) {
-                            this.setState(state => ({
-                                goals: [...state.goals, { id: uuid(), title, description }]
-                            }))
-                        }
-                    }}
-                >Add Goal</Button>
                 <CardGroup>
                     {goals.map(({ id, title, description }) => (
                         <Card body inverse color="warning">
@@ -42,15 +33,11 @@ class GoalsList extends Component {
                         size="sm"
                         >Edit</Button>
                         <Button
-                        className="remove-btn"
+                        className="delete-btn"
                         color="danger"
                         size="sm"
-                        onClick={() => {
-                            this.setState(state => ({
-                                goals: state.goals.filter(goal => goal.id !== id)
-                            }))
-                        }}
-                        >Remove
+                        onClick={this.onDeleteClick.bind(this, id)}
+                        >Delete
                         </Button>
                         </Card>
                     ))}
@@ -69,4 +56,4 @@ const mapStateToProps = (state) => ({
     goal: state.goal
 })
 
-export default connect(mapStateToProps, { getGoals })(GoalsList)
+export default connect(mapStateToProps, { getGoals, deleteGoal })(GoalsList)

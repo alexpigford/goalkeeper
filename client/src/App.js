@@ -1,9 +1,12 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
+import { Container, Row, Col } from 'reactstrap'
 
 import AppNavBar from './components/AppNavBar'
 import GoalsList from './components/GoalsList'
+import AddGoalModal from './components/AddGoalModal'
+
 
 import { Provider } from 'react-redux'
 import store from './store'
@@ -13,7 +16,10 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <AppNavBar />
-        <GoalsList />
+        <Container>
+          <AddGoalModal/>
+          <GoalsList />
+        </Container>
       </div>
     </Provider>
   )

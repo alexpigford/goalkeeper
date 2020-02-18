@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 
+const goals = require('./routes/api/goals')
+
 const app = express()
 
 app.use(express.json())
@@ -15,6 +17,9 @@ mongoose.connect(db, {
 })
     .then(() => console.log('MongoDB connected.'))
     .catch(err => console.log('Error: ', err))
+
+// ROUTES
+app.use('/api/goals', goals)
 
 const port = process.env.PORT || 5000
 

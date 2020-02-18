@@ -27,4 +27,11 @@ router.delete('/:id', (req, res) => {
         .catch(err => res.status(404).json({ success: false }))
 })
 
+// UPDATE 
+router.post('/:id', (req, res) => {
+    Goal.findByIdAndUpdate(req.params.id)
+        .then(goal => goal.update().then(() => res.json({ success: true })))
+        .catch(err => res.status(404).json({ success: false }))
+})
+
 module.exports = router

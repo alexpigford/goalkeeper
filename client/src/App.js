@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
-import { Container, Row, Col } from 'reactstrap'
+import { Container } from 'reactstrap'
 
 import AppNavBar from './components/AppNavBar'
 import GoalsList from './components/GoalsList'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button, CardTitle, CardText, Container, CardGroup } from 'reactstrap'
+import { Card, Button, CardTitle, CardText, Container, CardDeck } from 'reactstrap'
 import { connect } from 'react-redux'
 import { getGoals, deleteGoal } from '../actions/goalActions'
 import PropTypes from 'prop-types'
@@ -18,8 +18,8 @@ class GoalsList extends Component {
         const { goals } = this.props.goal
 
         return (
-            <Container>
-                <CardGroup>
+            <Container className="container">
+                <CardDeck>
                     {goals.map(({ _id, title, description }) => (
                         <Card 
                         body inverse color="warning"
@@ -28,7 +28,7 @@ class GoalsList extends Component {
                         <CardTitle>{ title }</CardTitle>
                         <CardText>{ description }</CardText>
                         <Button 
-                        color="secondary"
+                        color="success"
                         size="sm"
                         style={{ marginBottom: '0.5rem' }}
                         >Progress</Button>
@@ -46,7 +46,7 @@ class GoalsList extends Component {
                         </Button>
                         </Card>
                     ))}
-                </CardGroup>
+                </CardDeck>
             </Container>
         )
     }

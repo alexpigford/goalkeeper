@@ -1,26 +1,28 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
-
-const goals = require('./routes/api/goals')
+const config = require('config')
 
 const app = express()
 
 app.use(express.json())
 
 // DB CONFIG
-const db = require('./config/keys').mongoURI
+const db = config.get('mongoURI')
 
 // CONNECT TO MONGO
 mongoose.connect(db, { 
     useNewUrlParser: true,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true,
+    useCreateIndex: true 
 })
     .then(() => console.log('MongoDB connected.'))
     .catch(err => console.log('Error: ', err))
 
 // ROUTES
-app.use('/api/goals', goals)
+app.use('/api/goals', require('./routes/api/goals'))
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 // STATIC
 if(process.env.NODE_ENV === 'production') {

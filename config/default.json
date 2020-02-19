@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://alexpigford:2RcFZ7k9qwK1Mmvu@cluster0-9myj0.gcp.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtLookAway": "smokey_back_here_taking_a_shhh"
+}

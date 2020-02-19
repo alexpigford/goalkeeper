@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const auth = require('../../middleware/middlewareAuth')
 
 // GOAL MODEL
 const Goal = require('../../models/Goal')
@@ -11,7 +12,7 @@ router.get('/', (req, res) => {
 })
 
 // POST
-router.post('/', (req, res) => {
+router.post('/', auth, (req, res) => {
     const newGoal = new Goal({
         title: req.body.title,
         description: req.body.description
@@ -21,7 +22,7 @@ router.post('/', (req, res) => {
 })
 
 // DELETE
-router.delete('/:id', (req, res) => {
+router.delete('/:id', auth, (req, res) => {
     Goal.findById(req.params.id)
         .then(goal => goal.remove().then(() => res.json({ success: true })))
         .catch(err => res.status(404).json({ success: false }))

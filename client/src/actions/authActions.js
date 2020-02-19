@@ -48,8 +48,14 @@ export const register = ({ email, username, password }) => dispatch => {
                 type: REGISTER_FAIL
             })
         })
-        
+
 } 
+
+export const logout = () => {
+    return {
+        type: LOGOUT_SUCCESS
+    }
+}
 
 export const tokenConfig = getState => {
     const token = getState().auth.token

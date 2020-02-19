@@ -15,6 +15,11 @@ router.post('/', (req, res) => {
         return res.status(400).json({ msg: 'All fields are required.'})
     }
 
+    User.findOne({ username })
+        .then(user => {
+            if(user) return res.status(400).json({ msg: 'Username already exists'})
+        })
+
     User.findOne({ email })
         .then(user => {
             if(user) return res.status(400).json({ msg: "User already exists"})

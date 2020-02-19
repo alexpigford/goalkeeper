@@ -84,6 +84,7 @@ class AddGoalModal extends Component {
                                     id="goal"
                                     placeholder="Title Your Goal"
                                     onChange={this.onChange}
+                                    className="mb-3"
                                 />
                                 <Input
                                     type="text"
@@ -91,6 +92,7 @@ class AddGoalModal extends Component {
                                     id="goal"
                                     placeholder="Enter Goal Description"
                                     onChange={this.onChange}
+                                    className="mb-3"
                                 />
                                 <Button
                                     color="success"

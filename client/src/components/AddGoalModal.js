@@ -12,12 +12,17 @@ import {
 from 'reactstrap'
 import { connect } from 'react-redux'
 import { addGoal } from '../actions/goalActions'
+import PropTypes from 'prop-types'
 
 class AddGoalModal extends Component {
     state = {
         modal: false,
         title: '',
         description: ''
+    }
+
+    static propTypes = {
+        isAuthenticated: PropTypes.bool
     }
 
     toggle = () => {
@@ -46,13 +51,21 @@ class AddGoalModal extends Component {
     render() {
         return(
             <div>
-                <Button
+                { this.props.isAuthenticated ? 
+                    <Button
                     color="primary"
                     size="sm"
                     onClick={this.toggle}
                     style={{ marginBottom: '2rem' }}
-                >New Goal</Button>
+                    >New Goal</Button>
+                :
+                <h4 className="mb-3 ml-4">Please login to add a goal.</h4>
+            }
+
+
+
                 <Modal
+                    className="add"
                     isOpen={this.state.modal}
                     toggle={this.toggle}
                 >
@@ -97,7 +110,8 @@ class AddGoalModal extends Component {
 }
 
 const mapStateToProps = state => ({
-    goal: state.goal
+    goal: state.goal,
+    isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps, { addGoal })(AddGoalModal)

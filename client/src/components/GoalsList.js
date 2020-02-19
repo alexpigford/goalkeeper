@@ -6,6 +6,12 @@ import PropTypes from 'prop-types'
 
 class GoalsList extends Component {
 
+    static propTypes = {
+        getGoals: PropTypes.func.isRequired,
+        goal: PropTypes.object.isRequired,
+        isAuthenticated: PropTypes.bool
+    }
+
     componentDidMount() {
         this.props.getGoals()
     }
@@ -27,12 +33,18 @@ class GoalsList extends Component {
                         >
                         <CardTitle>{ title }</CardTitle>
                         <CardText>{ description }</CardText>
+
+                        { this.props.isAuthenticated ? 
+
                         <Button 
                         color="success"
                         size="sm"
                         style={{ marginBottom: '0.5rem' }}
-                        >Progress</Button>
-                        <Button 
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >Done!</Button>
+                        : null
+                        }
+                        {/* <Button 
                         color="info"
                         size="sm"
                         style={{ marginBottom: '0.5rem' }}
@@ -43,7 +55,7 @@ class GoalsList extends Component {
                         size="sm"
                         onClick={this.onDeleteClick.bind(this, _id)}
                         >Delete
-                        </Button>
+                        </Button> */}
                         </Card>
                     ))}
                 </CardDeck>
@@ -52,13 +64,9 @@ class GoalsList extends Component {
     }
 }
 
-GoalsList.propTypes = {
-    getGoals: PropTypes.func.isRequired,
-    goal: PropTypes.object.isRequired
-}
-
 const mapStateToProps = (state) => ({
-    goal: state.goal
+    goal: state.goal,
+    isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps, { getGoals, deleteGoal })(GoalsList)
